@@ -72,8 +72,7 @@ function flattr_button($url, $options = array())
       }
     }
 
-    $button = '<a
-      class="FlattrButton"
+    $button = '<a class="FlattrButton"
       style="display:none;"
       title="%s"
       data-flattr-uid="%s"
@@ -94,8 +93,7 @@ function flattr_button($url, $options = array())
       }
     }
 
-    $button = '<a
-      class="FlattrButton"
+    $button = '<a class="FlattrButton"
       style="display:none;"
       title="%s"
       rev="flattr;uid:%s;category:%s;'.$data.'"
