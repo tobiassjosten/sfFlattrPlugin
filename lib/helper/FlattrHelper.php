@@ -63,27 +63,52 @@ function flattr_button($url, $options = array())
 
   if ($options['html5'])
   {
+    $data = '';
+    if (!empty($options['data']))
+    {
+      foreach ($options['data'] as $key => $value)
+      {
+        $data .= sprintf(' data-flattr-%s="%s"', $key, $value);
+      }
+    }
+
     $button = '<a
       class="FlattrButton"
       style="display:none;"
       title="%s"
       data-flattr-uid="%s"
       data-flattr-category="%s"
+      '.$data.'
       href="%s">
       %s
       </a>';
   }
   else
   {
+    $data = '';
+    if (!empty($options['data']))
+    {
+      foreach ($options['data'] as $key => $value)
+      {
+        $data .= sprintf('%s:%s;', $key, $value);
+      }
+    }
+
     $button = '<a
       class="FlattrButton"
       style="display:none;"
       title="%s"
-      rev="flattr;uid:%s;category:%s;"
+      rev="flattr;uid:%s;category:%s;'.$data.'"
       href="%s">
       %s
       </a>';
   }
 
-  return sprintf($button, $options['title'], $options['uid'], $options['category'], $url, $options['description']);
+  return sprintf($button,
+    $options['title'],
+    $options['uid'],
+    $options['category'],
+    $url,
+    $options['description']
+  );
 }

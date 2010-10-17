@@ -144,6 +144,25 @@ class FlattrHelperTest extends PHPUnit_Framework_TestCase
     $this->assertContains('data-flattr-uid="tobiassjosten"', $button);
   }
 
+  public function testButtonData()
+  {
+    $options = array('data' => array('tester' => 'phpunit'));
+    $button = flattr_button('http://example.com/', $options);
+
+    $this->assertContains('tester:phpunit;', $button);
+  }
+
+  public function testButtonDataHTML5()
+  {
+    $options = array(
+      'html5' => true,
+      'data' => array('tester' => 'phpunit'),
+    );
+    $button = flattr_button('http://example.com/', $options);
+
+    $this->assertContains('data-flattr-tester="phpunit"', $button);
+  }
+
   protected function setUp()
   {
     $this->projectConfiguration = new ProjectConfiguration(dirname(__FILE__).'/../../fixtures/project/');
