@@ -1,0 +1,14 @@
+# all:
+#   sf_flattr_plugin:
+#     # Required
+#     uid:         User ID on Flattr.
+#     title:       The title of your item.
+#     description: A description of your item.
+#     category:    text, images, video, audio, software or rest
+#
+#     # Optional
+#     language:    Language of the item, using syntax 'en_GB'.
+#     tags:        Comma seperated,list of,tags
+#     button:      normal (default) or compact
+#     hidden:      1 to hide, 0 (default) to show on Flattr.com listing
+#     html5:       false

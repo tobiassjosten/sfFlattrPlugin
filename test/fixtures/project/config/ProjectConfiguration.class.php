@@ -15,4 +15,9 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->setPlugins(array('sfFlattrPlugin'));
     $this->setPluginPath('sfFlattrPlugin', dirname(__FILE__).'/../../../..');
   }
+
+  public function setupPlugins()
+  {
+    $this->pluginConfigurations['sfFlattrPlugin']->connectTests();
+  }
 }
