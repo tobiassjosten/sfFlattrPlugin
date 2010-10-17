@@ -16,7 +16,8 @@ class FlattrHelperTest extends PHPUnit_Framework_TestCase
 
   public function testButtonTitle()
   {
-    $button = flattr_button('http://example.com/', 'My awesome item');
+    $options = array('title' => 'My awesome item');
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertContains('title="My awesome item"', $button);
   }
@@ -30,21 +31,24 @@ class FlattrHelperTest extends PHPUnit_Framework_TestCase
 
   public function testButtonTitleMin()
   {
-    $button = flattr_button('http://example.com/', '1234');
+    $options = array('title' => '1234');
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertFalse($button);
   }
 
   public function testButtonTitleMax()
   {
-    $button = flattr_button('http://example.com/', str_repeat('a', 101));
+    $options = array('title' => str_repeat('a', 101));
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertFalse($button);
   }
 
   public function testButtonDescription()
   {
-    $button = flattr_button('http://example.com/', null, 'It is awesome!');
+    $options = array('description' => 'It is awesome!');
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertRegExp('~>(\r|\n|\t|\s)*It is awesome!(\r|\n|\t|\s)*</a>~', $button);
   }
@@ -58,28 +62,35 @@ class FlattrHelperTest extends PHPUnit_Framework_TestCase
 
   public function testButtonDescriptionMin()
   {
-    $button = flattr_button('http://example.com/', null, '1234');
+    $options = array('description' => '1234');
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertFalse($button);
   }
 
   public function testButtonDescriptionMax()
   {
-    $button = flattr_button('http://example.com/', null, str_repeat('a', 1001));
+    $options = array('description' => str_repeat('a', 1001));
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertFalse($button);
   }
 
   public function testButtonCategory()
   {
-    $button = flattr_button('http://example.com/', null, null, 'video');
+    $options = array('category' => 'video');
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertContains('category:video;', $button);
   }
 
   public function testButtonCategoryHTML5()
   {
-    $button = flattr_button('http://example.com/', null, null, 'video', null, true);
+    $options = array(
+      'category' => 'video',
+      'html5' => true,
+    );
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertContains('data-flattr-category="video"', $button);
   }
@@ -93,21 +104,27 @@ class FlattrHelperTest extends PHPUnit_Framework_TestCase
 
   public function testButtonCategoryDefaultHTML5()
   {
-    $button = flattr_button('http://example.com/', null, null, null, null, true);
+    $options = array('html5' => true);
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertContains('data-flattr-category="text"', $button);
   }
 
   public function testButtonUID()
   {
-    $button = flattr_button('http://example.com/', null, null, null, 'netsojssaibot');
+    $options = array('uid' => 'netsojssaibot');
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertContains('uid:netsojssaibot;', $button);
   }
 
   public function testButtonUIDHTML5()
   {
-    $button = flattr_button('http://example.com/', null, null, null, 'netsojssaibot', true);
+    $options = array(
+      'uid' => 'netsojssaibot',
+      'html5' => true,
+    );
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertContains('data-flattr-uid="netsojssaibot"', $button);
   }
@@ -121,7 +138,8 @@ class FlattrHelperTest extends PHPUnit_Framework_TestCase
 
   public function testButtonUIDDefaultHTML5()
   {
-    $button = flattr_button('http://example.com/', null, null, null, null, true);
+    $options = array('html5' => true);
+    $button = flattr_button('http://example.com/', $options);
 
     $this->assertContains('data-flattr-uid="tobiassjosten"', $button);
   }

@@ -12,59 +12,56 @@
 /**
  * Build a Flattr button.
  *
- * @param   string $url
- * @param   string $title
- * @param   string $description
- * @param   string $category
- * @param   string $uid
- * @param   bool   $html5
+ * @param  array $options  Array with configuration for the button. Required
+ * options left out are fetched from the app.yml configuration.
  *
  * @return  string
  */
-function flattr_button($url, $title = null, $description = null, $category = null, $uid = null, $html5 = false)
+//function flattr_button($url, $options['title'] = null, $options['description'] = null, $options['category'] = null, $options['uid'] = null, $options['html5'] = false)
+function flattr_button($url, $options = array())
 {
-  if (!$title)
+  if (empty($options['title']))
   {
-    $title = sfConfig::get('app_sf_flattr_plugin_title');
+    $options['title'] = sfConfig::get('app_sf_flattr_plugin_title');
   }
-  if (!$description)
+  if (empty($options['description']))
   {
-    $description = sfConfig::get('app_sf_flattr_plugin_description');
+    $options['description'] = sfConfig::get('app_sf_flattr_plugin_description');
   }
-  if (!$category)
+  if (empty($options['category']))
   {
-    $category = sfConfig::get('app_sf_flattr_plugin_category');
+    $options['category'] = sfConfig::get('app_sf_flattr_plugin_category');
   }
-  if (!$uid)
+  if (empty($options['uid']))
   {
-    $uid = sfConfig::get('app_sf_flattr_plugin_uid');
+    $options['uid'] = sfConfig::get('app_sf_flattr_plugin_uid');
   }
-  if (null === $html5)
+  if (!isset($options['html5']))
   {
-    $html5 = sfConfig::get('app_sf_flattr_plugin_html5', false);
+    $options['html5'] = sfConfig::get('app_sf_flattr_plugin_html5', false);
   }
 
   // These attributes are required by Flattr.
-  if (!$url || !$title || !$description || !$category)
+  if (!$url || !$options['title'] || !$options['description'] || !$options['category'])
   {
     return false;
   }
 
   // Titles must be between 5 and 100 characters.
-  $title_len = strlen($title);
+  $title_len = strlen($options['title']);
   if ($title_len < 5 || $title_len > 100)
   {
     return false;
   }
 
   // Descriptions must be between 5 and 1000 characters.
-  $description_len = strlen($description);
+  $description_len = strlen($options['description']);
   if ($description_len < 5 || $description_len > 1000)
   {
     return false;
   }
 
-  if ($html5)
+  if ($options['html5'])
   {
     $button = '<a
       class="FlattrButton"
@@ -88,5 +85,5 @@ function flattr_button($url, $title = null, $description = null, $category = nul
       </a>';
   }
 
-  return sprintf($button, $title, $uid, $category, $url, $description);
+  return sprintf($button, $options['title'], $options['uid'], $options['category'], $url, $options['description']);
 }
