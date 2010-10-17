@@ -67,7 +67,7 @@ function flattr_button($url, $title = null, $description = null, $category = nul
   if ($html5)
   {
     $button = '<a
-      class="flattr-button"
+      class="FlattrButton"
       style="display:none;"
       title="%s"
       data-flattr-uid="%s"
@@ -79,7 +79,7 @@ function flattr_button($url, $title = null, $description = null, $category = nul
   else
   {
     $button = '<a
-      class="flattr-button"
+      class="FlattrButton"
       style="display:none;"
       title="%s"
       rev="flattr;uid:%s;category:%s;"
