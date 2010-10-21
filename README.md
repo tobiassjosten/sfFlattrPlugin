@@ -1,6 +1,6 @@
 # sfFlattrPlugin
 
-This Symfony plugin enables easy to use integration with the [Flattr service](http://flattr.com/). Specifically, it gives a helper function to create Flattr buttons.
+This Symfony plugin enables easy to use integration with the [Flattr service](http://flattr.com/). Specifically, it provides a helper function to create Flattr buttons.
 
 ## Installation
 
