@@ -52,11 +52,19 @@ These are the settings you can use in your app.yml:
 
 ## Usage
 
-Creating a Flattr buttons involves first including the helper:
+Creating a Flattr buttons involves first including the helper. Either in your settings.yml:
+
+    # apps/frontend/config/settings.yml
+    all:
+      .settings:
+        standard_helpers:
+          - Flattr
+
+... or directly in your view:
 
     <?php use_helper('Flattr') ?>
 
-... and then using it. Here is an example with most of the configuration options either instead of or to override settings in app.yml:
+And then you may use the helper. Here is an example with most of the configuration options either instead of or to override settings in app.yml:
 
     flattr_button(url_for('my_route', $item, true), array(
       'uid' => 'tobiassjosten',
