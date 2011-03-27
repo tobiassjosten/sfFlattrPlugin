@@ -17,7 +17,6 @@
  *
  * @return  string
  */
-//function flattr_button($url, $options['title'] = null, $options['description'] = null, $options['category'] = null, $options['uid'] = null, $options['html5'] = false)
 function flattr_button($url, $options = array())
 {
   if (empty($options['title']))
@@ -44,21 +43,21 @@ function flattr_button($url, $options = array())
   // These attributes are required by Flattr.
   if (!$url || !$options['title'] || !$options['description'] || !$options['category'])
   {
-    return false;
+    return "<!-- Your Flattr button's title needs an URL, a title, a description and a category -->";
   }
 
   // Titles must be between 5 and 100 characters.
   $title_len = strlen($options['title']);
   if ($title_len < 5 || $title_len > 100)
   {
-    return false;
+    return "<!-- Your Flattr button's title need to be between 5 and 100 characters long -->";
   }
 
   // Descriptions must be between 5 and 1000 characters.
   $description_len = strlen($options['description']);
   if ($description_len < 5 || $description_len > 1000)
   {
-    return false;
+    return "<!-- Your Flattr button's description need to be between 5 and 1000 characters long -->";
   }
 
   if ($options['html5'])
